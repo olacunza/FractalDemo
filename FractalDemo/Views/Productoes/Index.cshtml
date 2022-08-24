@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FractalDemo.Models.Producto>
+﻿@model FractalDemo.ViewModel.IndexVM
 
 @{
     ViewData["Title"] = "Index";
@@ -15,22 +15,22 @@
         <tr>
             <th>N°</th>
             <th>
-                @Html.DisplayNameFor(model => model.NombreProducto)
+                @Html.DisplayNameFor(model => model.Producto.NombreProducto)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Categoria)
+                @Html.DisplayNameFor(model => model.Producto.Categoria)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PrecioUnitario)
+                @Html.DisplayNameFor(model => model.Producto.PrecioUnitario)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EstadoProducto)
+                @Html.DisplayNameFor(model => model.Producto.EstadoProducto)
             </th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Productos) {
         <tr>
                 <td>@Html.DisplayFor(modelItem => item.Producto_Id)</td>
             <td>
@@ -58,3 +58,5 @@
 }
     </tbody>
 </table>
+
+            @{Html.RenderPartial("_paginador",Model);}

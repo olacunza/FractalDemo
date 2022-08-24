@@ -1,0 +1,29 @@
+﻿@model FractalDemo.Models.BaseModelo
+
+@{
+    var cantidadPaginas = (int)Math.Ceiling((double)Model.TotalDeRegistros / Model.RegistrosPorPagina);
+}
+
+<div class="row">
+    <div class="col-10"></div>
+    <div class="col-2">
+        <ul class="pagination">
+            @if (Model.PaginaActual == 1)
+            {
+                <li class="disabled btn btn-light" style="text-decoration:none;">@Html.ActionLink("Anterior", null, new { pagina = 1 })</li>
+            }
+            else
+            {
+                <li class="btn btn-light" style="text-decoration:none;">@Html.ActionLink("Anterior", null, new { pagina = Model.PaginaActual - 1 })</li>
+            }
+            @if (Model.PaginaActual == cantidadPaginas)
+            {
+                <li class="disabled btn btn-light" style="text-decoration:none;">@Html.ActionLink("Siguiente", null, new { pagina = cantidadPaginas })</li>
+            }
+            else
+            {
+                <li class="btn btn-light" style="text-decoration:none;">@Html.ActionLink("Siguiente", null, new { pagina = Model.PaginaActual + 1 })</li>
+            }
+        </ul>
+    </div>
+</div>

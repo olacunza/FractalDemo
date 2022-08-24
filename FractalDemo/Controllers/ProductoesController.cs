@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FractalDemo.Datos;
 using FractalDemo.Models;
+using FractalDemo.ViewModel;
 
 namespace FractalDemo.Controllers
 {
@@ -20,13 +21,26 @@ namespace FractalDemo.Controllers
         }
 
         // GET: Productoes
-        public IActionResult Index()
+        public IActionResult Index(int pagina = 1)
         {
-            //DateTime fechaComparacion = new DateTime(2021, 11, 05);
-            //List<Producto> listaProductos = _context.Producto..Where(f => f.Fecha >= fechaComparacion).OrderBy(f => f.Fecha).ToList();
-            //List<Producto> listaProductos = _context.Productos.Include(p => p.Categoria).Take(5).ToList();
             List<Producto> listaProductos = _context.Productos.Include(p => p.Categoria).ToList();
-            return View(listaProductos);
+            var cantidadRegistrosPorPagina = 5;
+            using( _context )
+            {
+                var prods = _context.Productos.OrderBy(p => p.Producto_Id)
+                    .Skip((pagina - 1) * cantidadRegistrosPorPagina)
+                    .Take(cantidadRegistrosPorPagina).ToList();
+                var totalDeRegistros = _context.Productos.Count();
+
+                var modelo = new IndexVM();
+                modelo.Productos = prods;
+                modelo.PaginaActual = pagina;
+                modelo.TotalDeRegistros = totalDeRegistros;
+                modelo.RegistrosPorPagina = cantidadRegistrosPorPagina;
+                modelo.Productos2 = listaProductos;
+
+                return View(modelo);
+            }
         }
 
         // GET: Productoes/Details/5
