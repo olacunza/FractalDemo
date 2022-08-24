@@ -21,15 +21,39 @@ namespace FractalDemo.Controllers
         }
 
         // GET: Ordenes
-        public IActionResult Index(string buscarOrden)
+        public IActionResult Index(string buscarOrden, int pagina = 1)
+        {            
+            var cantidadRegistrosPorPagina = 5;
+                using (_context)
+                {
+                    var orders = _context.Ordenes.OrderBy(o => o.Orden_Id)
+                        .Skip((pagina - 1) * cantidadRegistrosPorPagina)
+                        .Take(cantidadRegistrosPorPagina).ToList();
+                    var totalDeRegistros = _context.Productos.Count();
+
+                    var modelo = new IndexVM();
+                    modelo.Ordenes = orders;
+                    modelo.PaginaActual = pagina;
+                    modelo.TotalDeRegistros = totalDeRegistros;
+                    modelo.RegistrosPorPagina = cantidadRegistrosPorPagina;
+
+                    return View(modelo);
+                }
+            
+
+        }
+
+        public IActionResult IndexBuscar(string buscarOrden)
         {
             var Ordeness = from or in _context.Ordenes select or;
-
             if (!String.IsNullOrEmpty(buscarOrden))
             {
                 Ordeness = Ordeness.Where(o => o.Cliente.Contains(buscarOrden));
             }
-
+            else
+            {
+                return RedirectToAction(nameof(Index));
+            }
             return View(Ordeness);
         }
 
