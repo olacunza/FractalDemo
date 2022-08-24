@@ -1,0 +1,203 @@
+﻿@model FractalDemo.Models.Orden
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br>
+<br />
+
+    <div class="row">
+        <div class="col-10">
+            <h1>
+                Order
+                @Html.DisplayNameFor(model => model.NumOrden)
+                @Html.DisplayFor(model => model.NumOrden)
+            </h1>
+        </div>
+        <div class="col-2">
+            <a class="btn btn-secondary text-white" style="width:70%;" asp-action="Index">Back</a>
+        </div>
+    </div>
+
+    <br />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cliente)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cliente)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EstadoPedido)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EstadoPedido)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+    </dl>
+
+    <!--TABLA FALTA-->
+
+<div class="row">
+
+    <form method="post" action="EliminarProductos">
+        <table class="table" style="text-align:center;">
+            <thead style="background-color:lavender;">
+                <tr>
+                    <th>
+                        N°
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+                    <th>
+                        Unit Price
+                    </th>
+                    <th>
+                        Cost
+                    </th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                
+                    <tr>
+                        <td>
+                            
+                        </td>
+                        <td>
+                            
+                        </td>
+                        <td>
+                            
+                        </td>
+                        <td>
+                            $
+                        </td>
+                        <td>
+                            Costo FormulaBack
+                        </td>
+                        <td>
+                            <button asp-action="EliminarProductos" type="submit" class="btn btn-danger" asp-route-idProducto="">Eliminar Producto</button>
+                        </td>
+                    </tr>
+                
+            </tbody>
+        </table>
+    </form>
+</div>
+
+    <!-- FINAL TABLA -->
+
+    <div class="row">
+        <div class="col-10"></div>
+        <div class="col-2">
+            <a class="btn btn-primary text-white" asp-action="AdministrarProductos" asp-route-id="@Model.Orden_Id">Add Item+</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-8"></div>
+        <div class="col-4">
+        <dt class="col-sm-5">
+            @Html.DisplayNameFor(model => model.MontoInicial)
+        </dt>
+        <dd class="col-sm-7">
+            @Html.DisplayFor(model => model.MontoInicial)
+        </dd>
+        <dt class="col-sm-5">
+            Taxes
+        </dt>
+        <dd class="col-sm-7"></dd>
+        <dt class="col-sm-4" style="font-size:13px;">
+            Total City Tax
+        </dt>
+        <dd class="col-sm-7" style="font-size:13px;">
+
+        </dd>
+        <dt class="col-sm-4" style="font-size:13px;">
+            Total Country Tax
+        </dt>
+        <dd class="col-sm-7" style="font-size:13px;">
+
+        </dd>
+        <dt class="col-sm-4" style="font-size:13px;">
+            Total State Tax
+        </dt>
+        <dd class="col-sm-7" style="font-size:13px;">
+
+        </dd>
+        <dt class="col-sm-4" style="font-size:13px;">
+            Total Federal Tax
+        </dt>
+        <dd class="col-sm-7" style="font-size:13px;">
+
+        </dd>
+        <dt class="col-sm-5">
+            Total Taxes
+        </dt>
+        <dd class="col-sm-7">
+            @Html.DisplayFor(model => model.IGV)
+        </dd>
+        <dt class="col-sm-5">
+            @Html.DisplayNameFor(model => model.MontoFinal)
+        </dt>
+        <dd class="col-sm-7">
+            @Html.DisplayFor(model => model.MontoFinal)
+        </dd>
+        </div>
+    </div>
+    <br />
+
+<div class="row">
+        <!-- INICIO COMPLETE ORDER -->
+        <div class="col-md-8"></div>
+            <div class="col-md-2">
+                <form asp-action="Edit" method="post">
+                        <div class="row" style="display:none">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Orden_Id" />
+                        <input asp-for="NumOrden" class="form-control" />
+                        <input asp-for="EstadoPedido" value="Completed" class="form-control" />
+                        <input asp-for="Cliente" class="form-control" />
+                        <input asp-for="Fecha" class="form-control" />
+                        </div>
+                    <div class="form-group">
+                        <input type="submit" value="Complete Order" class="btn btn-success text-white" style="width:145px; align-content:end;" />
+                    </div>
+                </form>
+            </div>
+
+        <!-- FINAL COMPLETE ORDER -->
+
+        <!--- INICIO REJECTED ORDER -->
+
+        <div class="col-md-2">
+                <form asp-action="Edit" method="post">
+                        <div class="row" style="display:none">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Orden_Id" />
+                        <input asp-for="NumOrden" class="form-control" />
+                        <input asp-for="EstadoPedido" value="Rejected" class="form-control" />
+                        <input asp-for="Cliente" class="form-control" />
+                        <input asp-for="Fecha" class="form-control" />
+                        </div>
+                    <div class="form-group">
+                        <input type="submit" value="Rejected Order" class="btn btn-danger text-white" style="width:130px;" />
+                    </div>
+                </form>
+            </div>
+
+        <!-- FINAL REJECTED ORDER-->
+    </div>
+</div>

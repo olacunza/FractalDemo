@@ -1,0 +1,95 @@
+﻿@model IEnumerable<FractalDemo.Models.Orden>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Orders</h1>
+<br />
+
+<div class="row">
+    <div class="col-10">
+        @using (Html.BeginForm()){
+
+            <p>
+                ClientName: @Html.TextBox("buscarOrden")
+                <input type="submit" value="Search">
+            </p>
+        }
+    </div>
+    <div class="col-2">
+        <p align="right">
+            <a class="btn btn-primary" asp-action="Create">Create Order</a>
+        </p>
+    </div>
+</div>
+
+
+
+<table class="table" style="text-align:center;">
+    <thead style="background-color:lavender;">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NumOrden)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cliente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstadoPedido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CantidadProducto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MontoInicial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IGV)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MontoFinal)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumOrden)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cliente)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EstadoPedido)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CantidadProducto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MontoInicial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IGV)
+            </td>
+            <td>
+               @Html.DisplayFor(modelItem => item.MontoFinal)    
+            </td>
+            <td>
+                <a style="text-decoration:none;" asp-action="Edit" asp-route-id="@item.Orden_Id">Edit</a>
+            <!--<a class="btn btn-success text-white" asp-action="AdministrarProductos" asp-route-id="item.Orden_Id">Administrar Productos</a>
+                <a class="btn btn-danger text-white" asp-action="Delete" asp-route-id="item.Orden_Id">Delete</a>-->
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

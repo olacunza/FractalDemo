@@ -1,0 +1,98 @@
+﻿@model FractalDemo.Models.Producto
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-8">
+        <h1>Create</h1>
+        <h4>Producto</h4>
+    </div>
+    <div class="col-4">
+        <p align="right">
+            <a class="btn btn-primary" href="~/Categorias/Index">Create Category</a>
+        </p>
+    </div>
+</div>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-3">
+                        <label asp-for="NombreProducto" class="control-label"></label>
+                    </div>
+                    <div class="col-9">
+                        <input asp-for="NombreProducto" class="form-control" />
+                    </div>
+                </div>
+                <span asp-validation-for="NombreProducto" class="text-danger"></span>
+            </div>
+
+            <br />
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-3">
+                        <label asp-for="PrecioUnitario" class="control-label"></label>
+                    </div>
+                    <div class="col-9">
+                        <input asp-for="PrecioUnitario" class="form-control" />
+                    </div>
+                </div>
+                <span asp-validation-for="PrecioUnitario" class="text-danger"></span>
+            </div>
+
+            <br />
+
+            <div class="form-group form-check">
+                <div class="row">
+                    <div class="col-3">
+                        <label asp-for="EstadoProducto" class="control-label"></label>
+                    </div>
+                    <div class="col-4">
+                        <p><input type="radio" asp-for="EstadoProducto" value="true" />Disponible</p>
+                        <span asp-validation-for="EstadoProducto" class="text-danger"></span>
+                    </div>
+                    <div class="col-5">
+                        <p><input type="radio" asp-for="EstadoProducto" value="false" />No Disponible</p>
+                        <span asp-validation-for="EstadoProducto" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-3">
+                        <label asp-for="Categoria_Id" class="control-label"></label>
+                    </div>
+                    <div class="col-9">
+                        <select asp-for="Categoria_Id" class="form-control" asp-items="ViewBag.Categoria_Id">
+                            <option disabled selected>Seleccionar Categoría</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<br />
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,170 @@
+﻿@model FractalDemo.Models.Orden
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br><br />
+<div>
+        <div class="row">
+            <div class="col-10">
+                <h1>
+                    Order
+                    @Html.DisplayNameFor(model => model.NumOrden)
+                    @Html.DisplayFor(model => model.NumOrden)
+                </h1>
+            </div>
+            <div class="col-2">
+                <a class="btn btn-secondary text-white" style="width:70%;" asp-action="Index">Back</a>
+            </div>
+        </div>
+        
+        <br />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cliente)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cliente)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EstadoPedido)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EstadoPedido)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+     </dl>
+
+     <!--TABLA FALTA-->
+
+     <div class="row">
+         <div class="col-10"></div>
+         <div class="col-2">
+            <a class="btn btn-primary text-white" asp-action="AdministrarProductos" asp-route-id="@Model.Orden_Id">Add Item+</a>
+         </div>
+         </div>
+    
+     <div class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MontoInicial)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MontoInicial)
+        </dd>
+        <dt class="col-sm-2">
+            Taxes
+        </dt>
+        <dd class="col-sm-10"></dd>
+        <dt class="col-sm-2">
+            Total City Tax
+        </dt>
+        <dd class="col-sm-10">
+
+        </dd>
+        <dt class="col-sm-2">
+            Total Country Tax
+        </dt>
+        <dd class="col-sm-10">
+
+        </dd>
+        <dt class="col-sm-2">
+            Total State Tax
+        </dt>
+        <dd class="col-sm-10">
+
+        </dd>
+        <dt class="col-sm-2">
+            Total Federal Tax
+        </dt>
+        <dd class="col-sm-10">
+
+        </dd>
+        <dt class = "col-sm-2">
+            Total Taxes
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IGV)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MontoFinal)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MontoFinal)
+        </dd>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-8"></div>
+    <div class="col-4">
+
+        <!-- INICIO COMPLETE ORDER -->
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Edit" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Orden_Id" />
+                    <div class="form-group">
+                        <label asp-for="NumOrden" class="control-label"></label>
+                        <input asp-for="NumOrden" class="form-control" />
+                        <span asp-validation-for="NumOrden" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="EstadoPedido" class="control-label"></label>
+                        <select asp-for="EstadoPedido" class="form-control">
+                            <option value="Pending">Pending</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Rejected">Rejected</option>
+                        </select>
+                        <span asp-validation-for="EstadoPedido" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Cliente" class="control-label"></label>
+                        <input asp-for="Cliente" class="form-control" />
+                        <span asp-validation-for="Cliente" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Fecha" class="control-label"></label>
+                        <input asp-for="Fecha" class="form-control" />
+                        <span asp-validation-for="Fecha" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CantidadProducto" class="control-label"></label>
+                        <input asp-for="CantidadProducto" class="form-control" />
+                        <span asp-validation-for="CantidadProducto" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MontoInicial" class="control-label"></label>
+                        <input asp-for="MontoInicial" class="form-control" />
+                        <span asp-validation-for="MontoInicial" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="IGV" class="control-label"></label>
+                        <input asp-for="IGV" class="form-control" />
+                        <span asp-validation-for="IGV" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MontoFinal" class="control-label"></label>
+                        <input asp-for="MontoFinal" class="form-control" />
+                        <span asp-validation-for="MontoFinal" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Complete Order" class="btn btn-success text-white" style="width:145px; align-content:end;" />
+                    </div>
+                </form>
+            </div>
+        </div>
+                        
+
+        <!-- FINAL COMPLETE ORDER -->
+
+        <a class="btn btn-success text-white" style="width:145px; align-content:end;" asp-action="">Complete Order</a>
+        <a class="btn btn-danger text-white" style="width:130px;" asp-action="">Reject Order</a>
+    </div>
+</div>

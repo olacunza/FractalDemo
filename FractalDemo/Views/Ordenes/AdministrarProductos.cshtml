@@ -1,0 +1,59 @@
+﻿@model FractalDemo.ViewModel.OrdenProductoVM
+
+@{
+    ViewData["Title"] = "ProductManagment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-10">
+        <h1>Add Product to  Order</h1>
+    </div>
+    <div class="col-2">
+        <a class="btn btn-primary text-white" asp-action="Edit" asp-route-id="@Model.Orden.Orden_Id">Back to List</a>
+    </div>
+</div>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" asp-action="AdministrarProductos">
+            <input type="hidden" asp-for="Orden.Orden_Id" />
+            <input type="hidden" asp-for="OrdenProducto.Orden_Id" />
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Orden.Cliente" class="control-label" hidden></label>
+                <input asp-for="Orden.Cliente" class="form-control" type="hidden"/>
+            </div>
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label for="productos" class="control-label">Productos</label>
+                @Html.DropDownListFor(u => u.OrdenProducto.Producto_Id, Model.ListaProductos, "--Seleccionar Productos--",
+                new {@class = "form-control"})
+            </div>
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Orden.CantidadProducto" class="control-label"></label>
+                <input asp-for="Orden.CantidadProducto" class="form-control" />
+            </div>
+
+            <br />
+
+            <div class="form-group">
+                <input type="submit" value="Asociar Producto a Orden" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+    <br /><br />
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

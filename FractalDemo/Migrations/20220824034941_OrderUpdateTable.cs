@@ -1,0 +1,87 @@
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+
+#nullable disable
+
+namespace FractalDemo.Migrations
+{
+    public partial class OrderUpdateTable : Migration
+    {
+        protected override void Up(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.AlterColumn<double>(
+                name: "MontoInicial",
+                table: "Ordenes",
+                type: "float",
+                nullable: true,
+                oldClrType: typeof(double),
+                oldType: "float");
+
+            migrationBuilder.AlterColumn<double>(
+                name: "MontoFinal",
+                table: "Ordenes",
+                type: "float",
+                nullable: true,
+                oldClrType: typeof(double),
+                oldType: "float");
+
+            migrationBuilder.AlterColumn<double>(
+                name: "IGV",
+                table: "Ordenes",
+                type: "float",
+                nullable: true,
+                oldClrType: typeof(double),
+                oldType: "float");
+
+            migrationBuilder.AlterColumn<int>(
+                name: "CantidadProducto",
+                table: "Ordenes",
+                type: "int",
+                nullable: true,
+                oldClrType: typeof(int),
+                oldType: "int");
+        }
+
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.AlterColumn<double>(
+                name: "MontoInicial",
+                table: "Ordenes",
+                type: "float",
+                nullable: false,
+                defaultValue: 0.0,
+                oldClrType: typeof(double),
+                oldType: "float",
+                oldNullable: true);
+
+            migrationBuilder.AlterColumn<double>(
+                name: "MontoFinal",
+                table: "Ordenes",
+                type: "float",
+                nullable: false,
+                defaultValue: 0.0,
+                oldClrType: typeof(double),
+                oldType: "float",
+                oldNullable: true);
+
+            migrationBuilder.AlterColumn<double>(
+                name: "IGV",
+                table: "Ordenes",
+                type: "float",
+                nullable: false,
+                defaultValue: 0.0,
+                oldClrType: typeof(double),
+                oldType: "float",
+                oldNullable: true);
+
+            migrationBuilder.AlterColumn<int>(
+                name: "CantidadProducto",
+                table: "Ordenes",
+                type: "int",
+                nullable: false,
+                defaultValue: 0,
+                oldClrType: typeof(int),
+                oldType: "int",
+                oldNullable: true);
+        }
+    }
+}

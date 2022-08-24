@@ -1,0 +1,60 @@
+﻿@model IEnumerable<FractalDemo.Models.Producto>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Products</h1>
+<br />
+<p align="right">
+    <a class="btn btn-primary" asp-action="Create">Create Product</a>
+</p>
+<table class="table" style="text-align:center;">
+    <thead style="background-color:lavender;">
+        <tr>
+            <th>N°</th>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreProducto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Categoria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrecioUnitario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstadoProducto)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                <td>@Html.DisplayFor(modelItem => item.Producto_Id)</td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreProducto)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Categoria.Nombre)
+                </td>
+            <td>$
+                @Html.DisplayFor(modelItem => item.PrecioUnitario)
+            </td>
+            <td>
+                    @{
+                        string estadoLabel = "Active";
+                        if(item.EstadoProducto == false){
+                            estadoLabel = "Inactive";
+                        }
+                }
+                @estadoLabel
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Producto_Id" style="text-decoration:none;">Edit</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
